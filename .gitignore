@@ -1,1 +1,3 @@
-list.json
+*.json
+*.html
+*.swp
