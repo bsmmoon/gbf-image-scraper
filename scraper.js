@@ -26,7 +26,7 @@ const convertToJSON = result => {
       id = `30${id.slice(0, 1)}0${id.slice(1)}000`
       obj[category][id] = name
     })
-  return JSON.stringify(obj)
+  return JSON.stringify(obj, null, 2)
 }
 
 const preprocessLines = lines => lines
