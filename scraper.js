@@ -30,7 +30,7 @@ const convertToJSON = result => {
 }
 
 const preprocessLines = lines => lines
-  .join("")
+  .join("</tr>")
   .split("<tr")
   .map(row => row
     .split("</td>")
@@ -52,7 +52,7 @@ https.get(URL, (resp) => {
   let lines = []
   let carryOver = ""
   resp.on("data", chunk => {
-    lines = (carryOver + chunk).split("\n")
+    lines = (carryOver + chunk).split("</tr>")
     carryOver = lines.pop()
     result = result.concat(preprocessLines(lines))
   })
