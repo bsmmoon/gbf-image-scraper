@@ -8,20 +8,6 @@
     } 
  *
  */
-
-const convertToJSON = result => {
-  let obj = {}
-  result
-    .sort((a, b) => a[0] > a[1])
-    .forEach(entry => {
-      let [id, category, name] = entry
-      if (!obj[category]) obj[category] = {}
-      id = `30${id.slice(0, 1)}0${id.slice(1)}000`
-      obj[category][id] = name
-    })
-  return JSON.stringify(obj, null, 2)
-}
-
 const preprocessLines = lines => lines
   .join("</tr>")
   .split("<tr")
