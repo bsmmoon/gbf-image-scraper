@@ -9,6 +9,3 @@ with open("output2") as f:
         data[id] = name
 
 print(json.dumps(data, indent=2))
-
-
-

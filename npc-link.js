@@ -1,16 +1,9 @@
 /*
  * Output Format:
     {
-      "R": {
-        "3020016000": "Mary"
-      },
-      "SR": {
-        "3030019000": "Vira"
-      },
-      "SSR": {
-        "3040040000": "Jeanne d'Arc",
-        "3040053000": "Vira (Summer)",
-        "3040081000": "Korwa"
+      "NPC": {
+        "3050000000": "Lyria",
+        "3050001000": "Vyrn",
       }
     } 
  *
@@ -33,20 +26,13 @@ const preprocessLines = lines => lines
   .join("</tr>")
   .split("<tr")
   .map(row => row
-    .split("</td>")
-    .slice(0, 3)
-    .map(col => {
-      let tokens = col
-        .replace("</a>", "")
-        .split(">")
-      return tokens[tokens.length - 1].trim()
-    })
-    .filter(col => col.length > 0)
+    .split("\" title=")[0]
+    .split("a href=\"")[1]
   )
-  .filter(row => row.length === 3)
+  .filter(e => !!e)
 
 const https = require("https")
-const URL = "https://gbf.wiki/All_Characters"
+const URL = "https://gbf.wiki/NPC_Characters_List"
 https.get(URL, (resp) => {
   let result = []
   let lines = []
@@ -60,9 +46,11 @@ https.get(URL, (resp) => {
   resp.on("end", _ => {
     lines = [carryOver]
     result = result.concat(preprocessLines(lines))
-    console.log(convertToJSON(result))
+    result.pop() // lazy way to handle text after table
+
+    // Print the end result
+    console.log(JSON.stringify({links: result}, null, 2))
   })
 
   resp.on("error", err => console.log(`Error: ${err.message}`))
 })
-

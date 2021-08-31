@@ -1,7 +1,8 @@
-run:
-	node scraper.js -> list.json
+npc-link:
+	node npc-link.js -> npc-link.json
 
 npc:
-	node npc.js -> npc.json
+	node npc -> npc.json
 
-
+playable:
+	node playable.js -> playable.json
