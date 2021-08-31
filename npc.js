@@ -57,9 +57,9 @@ let links = []
 fs.readFile("./progress.json", "utf8", (err, data) => {
   if (err) {
     progress = 0
+  } else {
+    progress = JSON.parse(data).current
   }
-
-  progress = JSON.parse(data).current
 
   fs.readFile("./npc-links.json", "utf8", (err, data) => {
     if (err) {

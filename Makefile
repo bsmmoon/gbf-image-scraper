@@ -1,8 +1,11 @@
-npc-link:
-	node npc-link.js -> npc-link.json
+playable:
+	node playable.js -> playable.json
+
+npc-links:
+	node npc-links.js -> npc-links.json
 
 npc:
 	node npc -> npc.json
 
-playable:
-	node playable.js -> playable.json
+format-npc:
+	python formatter.py -> characters.json
